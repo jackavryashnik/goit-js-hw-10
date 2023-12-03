@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-10/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>goit-js-hw-10</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+      integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers3.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-992cd48f.js">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-f90250d9.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/index-239ddd8e.css">
+  </head>
+  <body>
+    <input type="text" id="datetime-picker" />
+<button type="button" data-start>Start</button>
+
+<div class="timer">
+  <div class="field">
+    <span class="value" data-days>00</span>
+    <span class="label">Days</span>
+  </div>
+  <div class="field">
+    <span class="value" data-hours>00</span>
+    <span class="label">Hours</span>
+  </div>
+  <div class="field">
+    <span class="value" data-minutes>00</span>
+    <span class="label">Minutes</span>
+  </div>
+  <div class="field">
+    <span class="value" data-seconds>00</span>
+    <span class="label">Seconds</span>
+  </div>
+</div>
+
+    <form class="form">
+  <label>
+    Delay (ms)
+    <input type="number" name="delay" required />
+  </label>
+
+  <fieldset>
+    <legend>State</legend>
+    <label>
+      <input type="radio" name="state" value="fulfilled" required />
+      Fulfilled
+    </label>
+    <label>
+      <input type="radio" name="state" value="rejected" required />
+      Rejected
+    </label>
+  </fieldset>
+
+  <button type="submit">Create notification</button>
+</form>
+
+
+    
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+      integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>
