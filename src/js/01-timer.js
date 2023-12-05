@@ -2,29 +2,29 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'https://cdn.jsdelivr.net/npm/izitoast@1/+esm';
 
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-};
-
 const dateInput = document.querySelector('#datetime-picker');
 const dateBtn = document.querySelector('button[data-start]');
 const values = document.querySelectorAll('.value');
 let userSelectedDate;
 let intervalId;
 
-dateBtn.setAttribute('disabled', '');
-dateBtn.addEventListener('click', () => {
-  setTimer();
-  intervalId = setInterval(setTimer, 1000);
-});
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    isDateValid(this.defaultDate);
+    userSelectedDate = new Date(selectedDates);
+  },
+};
 
 flatpickr(dateInput, options);
+dateBtn.setAttribute('disabled', '');
+dateBtn.addEventListener('click', () => {
+  handleTimerUpdate();
+  intervalId = setInterval(handleTimerUpdate, 1000);
+});
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -47,25 +47,30 @@ function convertMs(ms) {
 
 const addLeadingZero = value => value.padStart(2, '0');
 
-function isDateValid() {
-  userSelectedDate = new Date(dateInput.value);
-
-  if (userSelectedDate <= Date.now()) {
+function isDateValid(currentDate) {
+  if (userSelectedDate <= currentDate) {
     dateBtn.setAttribute('disabled', '');
-      iziToast.error({
-        timeout: 5000,
-        position: 'topRight',
-        title: 'Error',
-        message: 'Please choose a date in the future'
+    iziToast.error({
+      timeout: 5000,
+      position: 'topRight',
+      title: 'Error',
+      message: 'Please choose a date in the future',
     });
   } else {
     dateBtn.removeAttribute('disabled');
   }
 }
 
-function setTimer() {
+function handleTimerUpdate() {
   const timeObj = convertMs(userSelectedDate - Date.now());
   const objKeys = Object.keys(timeObj);
+  
+  if (userSelectedDate - Date.now() <= 0) {
+    values.forEach(value => (value.innerHTML = '00'));
+    clearInterval(intervalId);
+    return;
+  }
+
   for (let i = 0; i < objKeys.length; i++) {
     values[i].innerHTML = addLeadingZero(String(timeObj[objKeys[i]]));
   }
@@ -73,5 +78,3 @@ function setTimer() {
     clearInterval(intervalId);
   }
 }
-
-dateInput.addEventListener('input', isDateValid);
