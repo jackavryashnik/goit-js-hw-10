@@ -24,6 +24,7 @@ dateBtn.setAttribute('disabled', '');
 dateBtn.addEventListener('click', () => {
   handleTimerUpdate();
   intervalId = setInterval(handleTimerUpdate, 1000);
+  dateBtn.setAttribute('disabled', '');
 });
 
 function convertMs(ms) {
@@ -64,7 +65,7 @@ function isDateValid(currentDate) {
 function handleTimerUpdate() {
   const timeObj = convertMs(userSelectedDate - Date.now());
   const objKeys = Object.keys(timeObj);
-  
+
   if (userSelectedDate - Date.now() <= 0) {
     values.forEach(value => (value.innerHTML = '00'));
     clearInterval(intervalId);
