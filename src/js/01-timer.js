@@ -14,8 +14,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    isDateValid(this.defaultDate);
     userSelectedDate = new Date(selectedDates);
+    isDateValid(options.defaultDate);
   },
 };
 
